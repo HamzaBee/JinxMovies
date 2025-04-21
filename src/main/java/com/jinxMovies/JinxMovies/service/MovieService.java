@@ -7,7 +7,13 @@ import java.util.Optional;
 
 public interface MovieService {
     Movie fetchMovieFromTMDb(Long tmdbId);
-    List<Movie>searchMovie(String query);
+    Optional<Movie>getTmbdMovieById(Long id);
+     List<Movie> searchMovies(String query);
+     Movie fetchMovieByTitle(String title);
+     List<Movie> fetchPopularMovies();
+     List<Movie> fetchTopRatedMovies();
+     List<Movie> fetchSimilarMovies(Long tmdbId);
+     List<Movie> fetchMovieRecommendations(Long tmdbId);
 
 
 
