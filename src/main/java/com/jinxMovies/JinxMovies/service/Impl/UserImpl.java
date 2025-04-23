@@ -4,6 +4,7 @@ import com.jinxMovies.JinxMovies.entity.User;
 import com.jinxMovies.JinxMovies.repository.UserRepository;
 import com.jinxMovies.JinxMovies.service.UserService;
 
+import java.util.List;
 import java.util.Optional;
 
 public class UserImpl implements UserService {
@@ -18,6 +19,11 @@ public class UserImpl implements UserService {
     @Override
     public User createUser(User user) {
         return userRepository.save(user);
+    }
+
+    @Override
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
     }
 
     @Override
@@ -40,24 +46,50 @@ public class UserImpl implements UserService {
         return userRepository.existsByEmail(email);
     }
 
-    @Override
-    public User verifyEmail(String token) {
-        return userRepository.findByVerificationToken(token);
-    }
+
 
     @Override
     public User resetPassword(String token, String newPassword) {
-        return null;
+        Optional<User> optionalUser = userRepository.findByResetPasswordToken(token);
+        if(optionalUser.isPresent()){
+            User user = optionalUser.get();
+            user.setHashPassword(newPassword);
+            user.setResetPasswordToken(null);
+            return userRepository.save(user);
+        }
+        throw new RuntimeException("Invalid Token");
+
     }
 
     @Override
     public User updateProfile(Long id, User updatedUser) {
-        return null;
+        Optional<User> optionalUser = userRepository.findById(id);
+        if(optionalUser.isPresent()){
+            User user = optionalUser.get();
+            user.setUserName(updatedUser.getUserName());
+            user.setEmail(updatedUser.getEmail());
+            user.setProfilePictureUrl(updatedUser.getProfilePictureUrl());
+            return  userRepository.save(user);
+        }
+        throw new RuntimeException("User not Found");
     }
 
     @Override
     public void deleteUser(Long id) {
         userRepository.deleteById(id);
 
+    }
+
+    @Override
+    public Optional<User> verifyEmailToken(String token) {
+        Optional<User> optionalUser = userRepository.findByEmail(token);
+        if(optionalUser.isPresent()){
+            User user = optionalUser.get();
+            user.setVerificationToken(null);
+            user.setEmailVerified(true);
+            userRepository.save(user);
+
+        }
+        return optionalUser;
     }
 }
