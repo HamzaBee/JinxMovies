@@ -1,5 +1,6 @@
 package com.jinxMovies.JinxMovies.controller;
 
+import com.jinxMovies.JinxMovies.DTO.TmdbMovieDTO;
 import com.jinxMovies.JinxMovies.entity.Movie;
 import com.jinxMovies.JinxMovies.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +24,8 @@ public class MovieController {
 
 
     @GetMapping("/search")
-    public ResponseEntity<List<Movie>> searchMovies(@RequestParam String query){
-        List<Movie> results  =movieService.searchMovies(query);
+    public ResponseEntity <List<TmdbMovieDTO>> searchMovies(@RequestParam String query){
+        List<TmdbMovieDTO> results  =movieService.searchMovies(query);
         if(results.isEmpty()){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(results);
         }

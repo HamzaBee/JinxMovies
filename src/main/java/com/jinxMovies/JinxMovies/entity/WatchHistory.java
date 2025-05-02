@@ -18,12 +18,13 @@ public class WatchHistory {
     private Long id;
     @CreationTimestamp
     private LocalDateTime watchedAt;
+
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
+
     @ManyToOne
     @JoinColumn(name = "movie_id", nullable = false)
-
     private Movie movie;
 
     public WatchHistory(LocalDateTime watchedAt, User user, Movie movie) {

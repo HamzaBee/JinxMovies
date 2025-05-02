@@ -82,7 +82,7 @@ public class UserImpl implements UserService {
 
     @Override
     public Optional<User> verifyEmailToken(String token) {
-        Optional<User> optionalUser = userRepository.findByEmail(token);
+        Optional<User> optionalUser = userRepository.findByVerificationToken(token);
         if(optionalUser.isPresent()){
             User user = optionalUser.get();
             user.setVerificationToken(null);

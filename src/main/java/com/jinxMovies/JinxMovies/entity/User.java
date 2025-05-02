@@ -57,5 +57,4 @@ public class User {
         bookmark.setUser(this);
     }
 
-
 }
