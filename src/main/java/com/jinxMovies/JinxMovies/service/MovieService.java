@@ -24,8 +24,6 @@ public interface MovieService {
     // Fetches similar movies from TMDb API based on a given TMDb ID
     List<TmdbMovieDTO> fetchSimilarMovies(Long tmdbId);
 
-    // Fetches movie recommendations from TMDb API based on a given TMDb ID
-    List<TmdbMovieDTO> fetchMovieRecommendations(Long tmdbId);
 }
 
 

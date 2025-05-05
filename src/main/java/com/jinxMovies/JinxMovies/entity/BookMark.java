@@ -1,35 +1,43 @@
 package com.jinxMovies.JinxMovies.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 
 @Entity
 @Data
-@Setter
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class BookMark {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne
-    @JoinColumn(name = "user_id")
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id",nullable = false)
     private User user;
-    @ManyToOne
-    @JoinColumn(name = "movie_id")
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "movie_id", nullable = false)
     private Movie movie;
 
-    public BookMark(User user, Movie movie) {
+    @Column(nullable = false)
+    private Long tmdbMovieId;
+
+    @Column(nullable = false)
+    private String movieTitle;
+
+    @Column
+    private String posterPath;
+
+    public BookMark(User user, Long tmdbMovieId, String movieTitle, String posterPath) {
         this.user = user;
-        this.movie = movie;
+        this.tmdbMovieId = tmdbMovieId;
+        this.movieTitle = movieTitle;
+        this.posterPath = posterPath;
     }
 
 
-    public void setUser(User user) {
-        this.user = user;
-    }
 }

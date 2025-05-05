@@ -50,9 +50,4 @@ public class MovieImpl implements MovieService {
     public List<TmdbMovieDTO> fetchSimilarMovies(Long tmdbId) {
         return tmdbService.fetchSimilarMovies(tmdbId);
     }
-
-    @Override
-    public List<TmdbMovieDTO> fetchMovieRecommendations(Long tmdbId) {
-        return tmdbService.fetchMovieRecommendations(tmdbId);
-    }
 }

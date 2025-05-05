@@ -1,16 +1,15 @@
 package com.jinxMovies.JinxMovies.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 public class User {
     @Id
@@ -56,5 +55,6 @@ public class User {
         bookMarks.add(bookmark);
         bookmark.setUser(this);
     }
+
 
 }

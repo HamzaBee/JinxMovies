@@ -1,10 +1,10 @@
 package com.jinxMovies.JinxMovies.service;
 
 import com.jinxMovies.JinxMovies.entity.User;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-
 public interface UserService {
     User createUser(User user);
     List<User> getAllUsers();
@@ -16,9 +16,5 @@ public interface UserService {
     User updateProfile(Long id, User updatedUser);
     void deleteUser(Long id);
     Optional<User> verifyEmailToken(String token);
-
-
-
-
 
 }

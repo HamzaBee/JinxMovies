@@ -3,10 +3,11 @@ package com.jinxMovies.JinxMovies.service.Impl;
 import com.jinxMovies.JinxMovies.entity.User;
 import com.jinxMovies.JinxMovies.repository.UserRepository;
 import com.jinxMovies.JinxMovies.service.UserService;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-
+@Service
 public class UserImpl implements UserService {
 
     private final UserRepository userRepository;
@@ -92,4 +93,6 @@ public class UserImpl implements UserService {
         }
         return optionalUser;
     }
+
+
 }
